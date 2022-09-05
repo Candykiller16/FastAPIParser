@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0498fdad0485c1b0dd5bcf1f914d151a54af65d7f44b3e122dedb7473c35534c"
+            "sha256": "099b88504584d0bd0a238e013aa20f256d273bb27257ae9440f53efba8772c9a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -37,6 +37,14 @@
             ],
             "index": "pypi",
             "version": "==0.82.0"
+        },
+        "flake8": {
+            "hashes": [
+                "sha256:6fbe320aad8d6b95cec8b8e47bc933004678dc63095be98528b7bdd2a9f510db",
+                "sha256:7a1cf6b73744f5806ab95e526f6f0d8c01c66d7bbe349562d22dfca20610b248"
+            ],
+            "index": "pypi",
+            "version": "==5.0.4"
         },
         "h11": {
             "hashes": [
@@ -91,6 +99,20 @@
             ],
             "version": "==3.3"
         },
+        "mccabe": {
+            "hashes": [
+                "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325",
+                "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"
+            ],
+            "version": "==0.7.0"
+        },
+        "pycodestyle": {
+            "hashes": [
+                "sha256:2c9607871d58c76354b697b42f5d57e1ada7d261c261efac224b664affdc5785",
+                "sha256:d1735fc58b418fd7c5f658d28d943854f8a849b01a5d0a1e6f3f3fdd0166804b"
+            ],
+            "version": "==2.9.1"
+        },
         "pydantic": {
             "hashes": [
                 "sha256:1072eae28bf034a311764c130784e8065201a90edbca10f495c906737b3bd642",
@@ -131,6 +153,13 @@
                 "sha256:f8b10e59c035ff3dcc9791619d6e6c5141e0fa5cbe264e19e267b8d523b210bf"
             ],
             "version": "==1.10.1"
+        },
+        "pyflakes": {
+            "hashes": [
+                "sha256:4579f67d887f804e67edb544428f264b7b24f435b263c4614f384135cea553d2",
+                "sha256:491feb020dca48ccc562a8c0cbe8df07ee13078df59813b83959cbdada312ea3"
+            ],
+            "version": "==2.5.0"
         },
         "python-dotenv": {
             "hashes": [
@@ -196,6 +225,7 @@
                 "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02",
                 "sha256:e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6"
             ],
+            "markers": "python_version < '3.10'",
             "version": "==4.3.0"
         },
         "uvicorn": {
