@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 fastapi = "*"
 flake8 = "*"
+pymongo = "*"
+beautifulsoup4 = "*"
+httpx = "*"
+requests = "*"
 
 [dev-packages]
 
