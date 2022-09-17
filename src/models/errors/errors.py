@@ -1,0 +1,3 @@
+class NoSneakerByThisIdError(ValueError):
+    pass
+

@@ -3,7 +3,7 @@ version: "3.3"
 services:
   app:
     build: .
-    command: python run.py
+    command: python main.py
     volumes:
       - .:/parsing/
     ports:

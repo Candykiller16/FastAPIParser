@@ -1,33 +1,42 @@
 import asyncio
-from pprint import pprint
 
-import pymongo
+import uvicorn
 
-from src.parsers.lamoda_parser import LamodaParser
+from src.di import di_container_controller, di_container
+from src.routers.lamoda import router
 
-db_client = pymongo.MongoClient(
-    "mongodb://mongodb:27017/?authSource=admin&readPreference=secondary&directConnection=true&ssl=false",
-    username="mongoadmin", password="mongopassword"
+di_container.app.include_router(
+    router
 )
 
-current_db = db_client["pyloungedb"]
+if __name__ == '__main__':
+    asyncio.run(di_container_controller.lamoda_controller.run())
+    uvicorn.run(
+        di_container.app,
+        host=di_container.config.service.host,
+        port=di_container.config.service.port,
+    )
 
-collection = current_db["youtubers"]
-
-parsing = LamodaParser("https://www.lamoda.by/c/5971/shoes-muzhkrossovki/?sitelink=topmenuM&l=5")
-collection.drop()
-
-
-def pull_to_mongodb():
-    for page in asyncio.run(parsing.get_all_data()):
-        for item in page:
-            collection.insert_one(item)
-    print("Success")
-
-
-pull_to_mongodb()
-
-print(collection.count_documents({}))
+#
+#
+# current_db = db_client["pyloungedb"]
+#
+# collection = current_db["youtubers"]
+#
+# parsing = LamodaParser("https://www.lamoda.by/c/5971/shoes-muzhkrossovki/?sitelink=topmenuM&l=5")
+# collection.drop()
+#
+#
+# def pull_to_mongodb():
+#     for page in asyncio.run(parsing.get_all_data()):
+#         for item in page:
+#             collection.insert_one(item)
+#     print("Success")
+#
+#
+# pull_to_mongodb()
+#
+# print(collection.count_documents({}))
 
 # pylounge = {
 #     'title': "PyLounge",

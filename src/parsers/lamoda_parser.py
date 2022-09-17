@@ -4,13 +4,17 @@ import httpx
 from bs4 import BeautifulSoup
 from fastapi import HTTPException
 
+from src.config.config import Config
+from src.di.container_general import ContainerGeneral
+from src.di.container_dao import ContainerDAO
+
 new_price = "x-product-card-description__price-new x-product-card-description__price-WEB8507_price_no_bold"
 current_price = "x-product-card-description__price-single x-product-card-description__price-WEB8507_price_no_bold"
 
 
 class LamodaParser:
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, container_general: ContainerGeneral):
+        self.sneaker_url = container_general.config.lamoda_url.sneakers_url
 
     async def parse_shoes(self, url, page):
         man_shoes_list = []
@@ -27,11 +31,11 @@ class LamodaParser:
                     shoes_brand = data.find('div', class_='x-product-card-description__brand-name').text
                     if data.find('div', class_='x-product-card-description__microdata-wrap').find('span',
                                                                                                   class_=f"{new_price}"):
-                        shoes_price = data.find('div', class_='x-product-card-description__microdata-wrap')\
+                        shoes_price = data.find('div', class_='x-product-card-description__microdata-wrap') \
                             .find('span', class_=f"{new_price}").text
-                    elif data.find('div', class_='x-product-card-description__microdata-wrap')\
+                    elif data.find('div', class_='x-product-card-description__microdata-wrap') \
                             .find('span', class_=f"{current_price}"):
-                        shoes_price = data.find('div', class_='x-product-card-description__microdata-wrap')\
+                        shoes_price = data.find('div', class_='x-product-card-description__microdata-wrap') \
                             .find('span', class_=f"{current_price}").text
                     shoes_price_new_one = shoes_price.replace(" ", "").replace("р.", "")
 
@@ -49,12 +53,8 @@ class LamodaParser:
     async def get_all_data(self):
         collected_data = []
         for page in range(1, 26):
-            collected_data.append(self.parse_shoes(self.url, page))
+            collected_data.append(self.parse_shoes(self.sneaker_url, page))
         return await asyncio.gather(*collected_data)
 
-    async def pull_to_mongo_db(self, collection):
-        collection.insert_many(self.get_all_data())
-        return "Success"
 
 
-parsing = LamodaParser("https://www.lamoda.by/c/5971/shoes-muzhkrossovki/?sitelink=topmenuM&l=5")

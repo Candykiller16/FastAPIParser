@@ -1,0 +1,1 @@
+from src.models.lamoda.sneakers import Sneakers, SneakersResponse, SneakersCreateUpdate

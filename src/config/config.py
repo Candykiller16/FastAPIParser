@@ -1,13 +1,11 @@
 from pydantic import BaseSettings
 
-
 _CONFIG_PREFIX = 'FASTAPI_SERVICE_'
 
 
 class Service(BaseSettings):
     host: str
     port: int
-    log_level: str
 
     class Config:
         env_prefix = _CONFIG_PREFIX + 'CONTAINER_'
@@ -27,9 +25,14 @@ class MongoDB(BaseSettings):
         env_file_encoding = 'utf-8'
 
 
+class LamodaUrl(BaseSettings):
+    sneakers_url = "https://www.lamoda.by/c/5971/shoes-muzhkrossovki/?sitelink=topmenuM&l=5"
+
+
 class Config(BaseSettings):
     service: Service = Service()
     mongodb: MongoDB = MongoDB()
+    lamoda_url: LamodaUrl = LamodaUrl()
 
     class Config:
         env_prefix = _CONFIG_PREFIX
